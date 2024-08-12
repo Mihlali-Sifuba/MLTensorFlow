@@ -1,6 +1,22 @@
 import numpy as np
 
-def read_idx(filename):
+def read_idx(filename: str)-> np.ndarray:
+    """
+    Reads data from an IDX file (image or label file format).
+    
+    Parameters:
+        filename (str): Path to the IDX file.
+    
+    Returns:
+        np.ndarray: Data read from the IDX file. 
+                    For image files, it returns a 3D array (num_items, num_rows, num_cols).
+                    For label files, it returns a 1D array (num_items,).
+    
+    Raises:
+        ValueError: If the magic number is unknown or if file format is invalid.
+        FileNotFoundError: If the file does not exist.
+        IOError: If there is an issue reading the file.
+    """
     try:
         with open(filename, 'rb') as f:
             # Read the magic number
