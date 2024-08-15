@@ -18,13 +18,24 @@ def plot_images(images: np.ndarray, labels: np.ndarray, num_images: int = 10):
     if num_images > len(images):
         num_images = len(images)
 
+    # Determine the number of rows and columns for the grid
+    num_cols = min(num_images, 5)  # Max 5 columns
+    num_rows = (num_images + num_cols - 1) // num_cols  # Ceiling division to get the number of rows
+
     # Create a grid for the plots
-    fig, axes = plt.subplots(1, num_images, figsize=(15, 5))
+    fig, axes = plt.subplots(num_rows, num_cols, figsize=(15, num_rows * 3))
+    axes = axes.flatten()  # Flatten the 2D array of axes to make indexing easier
+
     for i in range(num_images):
         axes[i].imshow(images[i], cmap='gray')
         axes[i].set_title(f'Label: {labels[i]}')
         axes[i].axis('off')  # Hide the axis
+
+    # Turn off any remaining axes that are not used
+    for j in range(num_images, len(axes)):
+        axes[j].axis('off')
     
+    plt.tight_layout()
     plt.show()
 
 if __name__ == "__main__":
@@ -38,4 +49,3 @@ if __name__ == "__main__":
     
     except Exception as e:
         print(f"An error occurred: {e}")
-
