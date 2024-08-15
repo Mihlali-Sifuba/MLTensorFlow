@@ -1,3 +1,6 @@
 # These files are used for development and testing purposes
 test.py
 uvavanyo.py
+
+# Filter all the compiled bytecode files
+*.pyc
