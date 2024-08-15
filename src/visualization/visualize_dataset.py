@@ -1,10 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import rcParams
 import sys
 import os
 # Add the 'src' directory to sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'src')))
 from processing.extract import read_idx
+
+# Enable LaTeX for rendering
+rcParams['text.usetex'] = True
 
 def plot_images(images: np.ndarray, labels: np.ndarray, num_images: int = 10):
     """
@@ -28,7 +32,7 @@ def plot_images(images: np.ndarray, labels: np.ndarray, num_images: int = 10):
 
     for i in range(num_images):
         axes[i].imshow(images[i], cmap='gray')
-        axes[i].set_title(f'Label: {labels[i]}')
+        axes[i].set_title(f'Label: ${labels[i]}$', fontsize=14)
         axes[i].axis('off')  # Hide the axis
 
     # Turn off any remaining axes that are not used
